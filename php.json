@@ -1,0 +1,35 @@
+{
+    "php_log": {
+        "title": "PHP log format",
+        "description": "Log format used by PHP (and PHP-FPM)",
+        "url": "http://en.wikipedia.org/wiki/PHP",
+        "regex": {
+            "fpm": {
+                "pattern": "^\\[(?<date>\\d{2}-\\w{3}-\\d{4}) (?<timestamp>\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?)\\] (?<level>[A-Z]+): (?:pid (?<pid>\\d{1,8}),)?(?<body>.*)$"
+            },
+            "error": {
+                "pattern": "^\\[(?<date>\\w{3} \\w{3} \\d{2}) (?<timestamp>\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)? \\d{4})\\] \\[(?<type>\\w+\\:\\w+)\\] (\\[pid (?<pid>\\d{1,8})\\])?(?<body>.*)$"
+            }
+        },
+        "value": {
+            "date": { "kind": "string", "identifier": true },
+            "type": { "kind": "string", "identifier": true },
+            "body": { "kind": "string" },
+            "pid": { "kind": "integer", "identifier": true }
+        },
+        "level-field": "level",
+        "level": {
+            "error": "ERROR",
+            "warning": "WARNING",
+            "info": "NOTICE",
+            "debug": "DEBUG"
+        },
+        "sample": [
+            { "line" : "[29-Oct-2015 13:17:53] NOTICE: Terminating ..." },
+            { "line" : "[29-Oct-2015 09:11:20] NOTICE: [pool www] 'group' directive is ignored when FPM is not running as root" },
+            { "line" : "[03-Dec-2015 16:37:35.430903] DEBUG: pid 5135, fpm_socket_af_inet_listening_socket(), line 308: Found address for 127.0.0.1, socket opened on 127.0.0.1" },
+            { "line" : "[03-Dec-2015 16:37:36.505733] DEBUG: pid 5135, fpm_pctl_perform_idle_server_maintenance(), line 379: [pool www] currently 0 active children, 3 spare children" },
+            { "line" : "[Thu Oct 29 07:26:38.171491 2015] [mpm_prefork:notice] [pid 11789] AH00163: Apache/2.4.16 (Unix) configured -- resuming normal operations" }
+        ]
+    }
+}
